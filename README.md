@@ -1,4 +1,4 @@
-<h1 align="center">Deep-Live-Cam 2.1.3</h1>
+# Deep-Live-Cam 2.1.3
 
 <p align="center">
   Real-time face swap and video deepfake with a single click and only a single image.
@@ -13,6 +13,8 @@
 </p>
 
 > **Personal Fork Note:** I'm using this for learning purposes and experimenting with face-swap pipelines. Upstream repo: [hacksider/Deep-Live-Cam](https://github.com/hacksider/Deep-Live-Cam)
+>
+> **My notes:** Tested on Ubuntu 22.04 with an RTX 3070. Main branch tracks upstream; I keep personal experiments on the `dev` branch.
 
 ##  Disclaimer
 
@@ -38,9 +40,4 @@ Users are expected to use this software responsibly and legally. If using a real
 
 ##### This is the fastest build you can get if you have a discrete NVIDIA or AMD GPU, CPU or Mac Silicon, And you'll receive special priority support. 2.7 beta is the best you can have with 30+ extra features than the open source version.
  
-###### These Pre-builts are perfect for non-technical users or those who don't have time to, or can't manually install all the requirements. Just a heads-up: this is an open-source project, so you can also install it manually. 
-
-## TLDR; Live Deepfake in just 3 Clicks
-![easysteps](https://github.com/user-attachments/assets/af825228-852c-411b-b787-ffd9aac72fc6)
-1. Select a face
-2. Se
+###### These Pre-builts are perfect for non-technical users or those who don't have time to, or can't manually install all the requirements. Just a heads-up: this is an open-source project, so
