@@ -34,5 +34,6 @@ Before creating a Pull Request (PR), ensure you have completed the following tes
     *   Changes should not negatively impact the boot time of either the application or the real-time faceswap feature.
 *   **GPU Overloading**:
     *   Test for a minimum of 15 minutes to guarantee no GPU overloading, which could lead to crashes.
+    *   > **Personal note**: On my RTX 3060 I also monitor VRAM usage with `nvidia-smi` during this test to catch any slow memory leaks.
 *   **App Performance**:
     *   The application should remain responsive and not exhibit any lag.
