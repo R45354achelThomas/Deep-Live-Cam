@@ -15,6 +15,8 @@
 > **Personal Fork Note:** I'm using this for learning purposes and experimenting with face-swap pipelines. Upstream repo: [hacksider/Deep-Live-Cam](https://github.com/hacksider/Deep-Live-Cam)
 >
 > **My notes:** Tested on Ubuntu 22.04 with an RTX 3070. Main branch tracks upstream; I keep personal experiments on the `dev` branch.
+>
+> **Setup reminder (for myself):** Run `pip install -r requirements.txt` inside a Python 3.10 venv, then `python run.py --execution-provider cuda` to use the GPU. CPU mode works but is noticeably slower — around 4–5 fps vs 25+ on CUDA.
 
 ##  Disclaimer
 
@@ -40,4 +42,4 @@ Users are expected to use this software responsibly and legally. If using a real
 
 ##### This is the fastest build you can get if you have a discrete NVIDIA or AMD GPU, CPU or Mac Silicon, And you'll receive special priority support. 2.7 beta is the best you can have with 30+ extra features than the open source version.
  
-###### These Pre-builts are perfect for non-technical users or those who don't have time to, or can't manually install all the requirements. Just a heads-up: this is an open-source project, so
+###### These Pre-builts are perfect for non-technical users or those who don'
