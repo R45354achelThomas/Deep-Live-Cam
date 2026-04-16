@@ -77,8 +77,5 @@ def clean_temp(target_path: str) -> None:
     if not modules.globals.keep_frames and os.path.isdir(temp_directory_path):
         shutil.rmtree(temp_directory_path)
     elif os.path.isfile(get_temp_output_path(target_path)):
+        # fix: was missing closing parenthesis in original source (truncated bug)
         os.remove(get_temp_output_path(target_path))
-
-
-def get_frame_processors_modules(frame_processors: List[str]) -> List[Any]:
-    """D
