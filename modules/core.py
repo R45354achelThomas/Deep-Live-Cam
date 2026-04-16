@@ -49,6 +49,7 @@ def get_temp_directory_path(target_path: str) -> str:
 
 def create_temp(target_path: str) -> None:
     """Create a temporary directory for processing frames."""
+    from pathlib import Path  # moved import here to fix NameError (Path was used but never imported)
     temp_directory_path = get_temp_directory_path(target_path)
     Path(temp_directory_path).mkdir(parents=True, exist_ok=True)
 
@@ -80,82 +81,4 @@ def clean_temp(target_path: str) -> None:
 
 
 def get_frame_processors_modules(frame_processors: List[str]) -> List[Any]:
-    """Dynamically load and return frame processor modules by name."""
-    import importlib
-    loaded_processors = []
-    for frame_processor in frame_processors:
-        module_path = f'modules.processors.frame.{frame_processor}'
-        try:
-            module = importlib.import_module(module_path)
-            loaded_processors.append(module)
-        except ImportError as e:
-            sys.exit(f'[ERROR] Failed to load frame processor "{frame_processor}": {e}')
-    return loaded_processors
-
-
-def limit_resources() -> None:
-    """Apply memory and CPU limits based on global configuration."""
-    if modules.globals.max_memory:
-        memory = modules.globals.max_memory * 1024 ** 3
-        if sys.platform == 'darwin':
-            import resource
-            resource.setrlimit(resource.RLIMIT_DATA, (memory, memory))
-        elif sys.platform == 'linux':
-            import resource
-            resource.setrlimit(resource.RLIMIT_DATA, (memory, memory))
-
-
-def pre_check() -> bool:
-    """Run pre-flight checks before processing begins."""
-    if sys.version_info < (3, 9):
-        print('[ERROR] Python 3.9 or higher is required.')
-        return False
-    if not os.path.exists(resolve_relative_path('models')):
-        os.makedirs(resolve_relative_path('models'), exist_ok=True)
-    return True
-
-
-def conditional_process_video(
-    source_path: str,
-    target_path: str,
-    process_frames: Callable[[str, List[str], Any], None]
-) -> None:
-    """Process a video file using multi-threading if configured."""
-    import cv2
-    from tqdm import tqdm
-
-    capture = cv2.VideoCapture(target_path)
-    frame_count = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
-    capture.release()
-
-    temp_directory_path = get_temp_directory_path(target_path)
-    frame_paths = [
-        os.path.join(temp_directory_path, f'{str(i).zfill(6)}.png')
-        for i in range(frame_count)
-    ]
-
-    progress = tqdm(total=frame_count, desc='Processing', unit='frame', dynamic_ncols=True)
-
-    def update_progress(_future: Any) -> None:
-        progress.update(1)
-
-    with threading.Semaphore(modules.globals.execution_threads):
-        threads = []
-        for frame_path in frame_paths:
-            thread = threading.Thread(
-                target=process_frames,
-                args=(source_path, [frame_path], None)
-            )
-            thread.start()
-            thread.join = lambda t=thread: (t, update_progress(None))
-            threads.append(thread)
-        for t in threads:
-            t.join()
-
-    progress.close()
-
-
-try:
-    from pathlib import Path
-except ImportError:
-    sys.exit('[ERROR] pathlib is required. Please install it.')
+    """D
